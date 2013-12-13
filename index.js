@@ -28,7 +28,7 @@ function makeModelHapi(model) {
     },
     model.extendModel({
         getRequest: function () {
-            return this.__verymdeta.request;
+            return this.__verymeta.request;
         },
     });
 }
