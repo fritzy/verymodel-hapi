@@ -19,6 +19,22 @@ function modelFromValidation(hapidef) {
     return updateDef(new verymodel.VeryModel({}), hapidef);
 }
 
+function makeModelHapi(model) {
+    model.extendModel({
+        hapiCreate: function (request) {
+            var inst;
+            inst = this.create(request.payload);
+            inst.__verymeta.request = request;
+            return inst;
+        },
+        getRequest: function () {
+            return this.__verymdeta.request;
+        },
+    });
+}
+
+
 module.exports = {
     modelFromValidation: modelFromValidation,
+    makeModelHapi: makeModelHapi,
 };
