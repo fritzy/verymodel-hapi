@@ -22,7 +22,7 @@ function modelFromValidation(hapidef) {
 function makeModelHapi(model) {
     model.hapiCreate = function (request) {
         var inst;
-        inst = this.create(request.payload);
+        inst = this.create(request.payload || {});
         inst.__verymeta.request = request;
         return inst;
     },
