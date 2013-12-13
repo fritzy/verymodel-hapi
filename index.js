@@ -20,13 +20,13 @@ function modelFromValidation(hapidef) {
 }
 
 function makeModelHapi(model) {
+    model.hapiCreate = function (request) {
+        var inst;
+        inst = this.create(request.payload);
+        inst.__verymeta.request = request;
+        return inst;
+    },
     model.extendModel({
-        hapiCreate: function (request) {
-            var inst;
-            inst = this.create(request.payload);
-            inst.__verymeta.request = request;
-            return inst;
-        },
         getRequest: function () {
             return this.__verymdeta.request;
         },

@@ -10,8 +10,9 @@ Tools for VeryModel use in Hapi
     var verymodel = require('verymodel');
     var veryhapi = require('verymodel-hapi');
     
-    var Person = verymodel.VeryModel({
+    var Person = new verymodel.VeryModel({
         name: {required: true},
+        id: {},
     });
 
     //add hapi functionality to the model factory and instances
@@ -23,15 +24,19 @@ Tools for VeryModel use in Hapi
             //some db save
             var request = this.getRequest();
         },
+        refresh: function () {
+            //kind of like load, but on an already instanciated method
+            someDBCall(this.id)
+        }
     });
 
     //extend model factory
-    Person.prototype.load = function (id) {
+    Person.load = function (id) {
         var obj = someDBQuery(id);
         return Person.create(obj);
     };
 
-    Person.prototype.loadByName = function (name) {
+    Person.loadByName = function (name) {
         // ...
     };
 
