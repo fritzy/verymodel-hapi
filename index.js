@@ -33,8 +33,20 @@ function makeModelHapi(model) {
     });
 }
 
+function VeryHapiModel(def) {
+    verymodel.VeryModel.call(this, def);
+    makeModelHapi(this);
+}
+
+VeryHapiModel.prototype = Object.create(verymodel.VeryModel.prototype);
+
+(function () {
+}).call(VeryHapiModel.prototype);
+
 
 module.exports = {
     modelFromValidation: modelFromValidation,
     makeModelHapi: makeModelHapi,
+    VeryHapiModel: VeryHapiModel,
 };
+
