@@ -1,7 +1,7 @@
 var verymodel = require('verymodel');
 var hapi = require('hapi');
 
-function modelFromValidation(hapidef) {
+function modelFromValidation(hapidef, startmodel) {
     function updateDef(model, hapichunk) {
         Object.keys(hapichunk).forEach(function (field) {
             var value = hapichunk[field];
@@ -16,7 +16,11 @@ function modelFromValidation(hapidef) {
         });
         return model;
     }
-    return updateDef(new verymodel.VeryModel({}), hapidef);
+    if (typeof startmodel !== 'undefined') {
+        return updateDef(startmodel, hapidef);
+    } else {
+        return updateDef(new verymodel.VeryModel({}), hapidef);
+    }
 }
 
 function makeModelHapi(model) {
@@ -41,6 +45,14 @@ function VeryHapiModel(def) {
 VeryHapiModel.prototype = Object.create(verymodel.VeryModel.prototype);
 
 (function () {
+    this.loadValidator = function (hapidef) {
+        modelFromValidation(hapidef, this);
+    };
+    
+    this.exportValidator = function (fields) {
+        fields = fields || this.fields;
+        // blah blah blah
+    };
 }).call(VeryHapiModel.prototype);
 
 
