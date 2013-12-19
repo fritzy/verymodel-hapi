@@ -1,6 +1,6 @@
 {
   "name": "verymodel-hapi",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/fritzy/VeryModel",
   "repository": {
     "type": "git",
@@ -8,14 +8,13 @@
   },
   "description": "Hapi integration tools for VeryModel",
   "dependencies": {
-      "verymodel": "1.4.*",
-      "hapi": "*"
+    "verymodel": "1.4.*",
+    "hapi": "*"
   },
   "devDependencies": {
-      "nodeunit": "0.8.1",
-      "precommit-hook": "0.3.5"
+    "nodeunit": "0.8.1",
+    "precommit-hook": "0.3.5"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "main": "index.js"
 }
